@@ -35,9 +35,10 @@ export const TaglistCard: React.FC = () => {
   ]);
 
   const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
 
   return (
-    <Card className="max-w-md">
+    <Card className="w-[28rem]">
       <CardHeader>
         <CardTitle>SCR_FND_MTR_HILO_FAILED</CardTitle>
         <CardDescription>High/Low Check Failed</CardDescription>
@@ -59,10 +60,13 @@ export const TaglistCard: React.FC = () => {
           ))}
           <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
-              <button onClick={() => setOpen(true)}>
+              <button
+                onClick={() => setOpen(true)}
+                className="flex items-center justify-center"
+              >
                 <Badge
                   variant={open ? "default" : "secondary"}
-                  className="hover:bg-primary hover:text-primary-foreground"
+                  className="hover:bg-primary hover:text-primary-foreground h-full"
                 >
                   <i className="fa-solid fa-circle-plus mr-2"></i> Add Tag
                 </Badge>
@@ -70,7 +74,11 @@ export const TaglistCard: React.FC = () => {
             </PopoverTrigger>
             <PopoverContent className="p-0">
               <Command>
-                <CommandInput placeholder="Add a tag..." />
+                <CommandInput
+                  value={value}
+                  onValueChange={setValue}
+                  placeholder="Add a tag..."
+                />
                 <CommandEmpty>Create a New Tag</CommandEmpty>
                 <CommandGroup>
                   {allTags
@@ -79,14 +87,25 @@ export const TaglistCard: React.FC = () => {
                       <CommandItem
                         key={allTag}
                         value={allTag}
-                        onSelect={(value) => {
-                          setTags((prev) => [...prev, value]);
+                        onSelect={() => {
+                          setTags((prev) => [...prev, allTag]);
                           setOpen(false);
                         }}
                       >
                         {allTag}
                       </CommandItem>
                     ))}
+                  {value.length > 0 && !tags.includes(value) && (
+                    <CommandItem
+                      value={value}
+                      onSelect={() => {
+                        setTags((prev) => [...prev, value]);
+                        setOpen(false);
+                      }}
+                    >
+                      {value}
+                    </CommandItem>
+                  )}
                 </CommandGroup>
               </Command>
             </PopoverContent>
