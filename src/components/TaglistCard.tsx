@@ -7,9 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Input } from "@/components/ui/input";
 import {
   Popover,
   PopoverContent,
@@ -79,7 +77,6 @@ export const TaglistCard: React.FC = () => {
                   onValueChange={setValue}
                   placeholder="Add a tag..."
                 />
-                <CommandEmpty>Create a New Tag</CommandEmpty>
                 <CommandGroup>
                   {allTags
                     .filter((i) => !tags.includes(i))
@@ -90,6 +87,7 @@ export const TaglistCard: React.FC = () => {
                         onSelect={() => {
                           setTags((prev) => [...prev, allTag]);
                           setOpen(false);
+                          setValue("");
                         }}
                       >
                         {allTag}
@@ -101,6 +99,7 @@ export const TaglistCard: React.FC = () => {
                       onSelect={() => {
                         setTags((prev) => [...prev, value]);
                         setOpen(false);
+                        setValue("");
                       }}
                     >
                       {value}
