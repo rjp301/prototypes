@@ -11,6 +11,7 @@
   "dependencies": {
     "@fluentui/react-components": "^9.31.0",
     "@fluentui/react-icons": "^2.0.215",
+    "@fluentui/react-tags-preview": "^0.2.9",
     "@types/node": "20.6.0",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
